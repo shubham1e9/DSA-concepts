@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int minDeletions(string s) {
+        int deleteCount = 0;
+        vector<int> v(26, 0);
+
+        for(auto i : s) {
+            v[i - 'a']++;
+        }
+
+        unordered_set<int> sat;
+
+        for(int i=0; i<26; i++) {
+            
+            while(v[i] && sat.find(v[i]) != sat.end()) {
+                v[i]--;
+                deleteCount++;
+            }
+            sat.insert(v[i]);
+        }
+        return deleteCount;
+    }
+};
