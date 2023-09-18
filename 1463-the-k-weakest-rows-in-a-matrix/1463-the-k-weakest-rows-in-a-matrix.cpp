@@ -2,15 +2,16 @@ class Solution {
 public:
     vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
         vector<int> weakestRows;
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> minHeap;
+        vector<pair<int, int>> soldiers;
 
         for(int row=0; row<mat.size(); row++) {
             int count1 = onesCount(mat[row]);
-            minHeap.push({count1, row});
+            soldiers.push_back({count1, row});
         }
-        while(k--) {
-            weakestRows.push_back(minHeap.top().second);
-            minHeap.pop();
+        sort(soldiers.begin(), soldiers.end());
+
+        for(int i=0; i<k; i++) {
+            weakestRows.push_back(soldiers[i].second);
         }
         return weakestRows;
     }
