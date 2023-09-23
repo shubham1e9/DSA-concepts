@@ -5,10 +5,11 @@ public:
         vector<int> ans(n);
         stack<int> st;
 
-        for(int i=prices.size()-1; i>=0; i--) { 
-            while(!st.empty() && st.top() > prices[i])
-                st.pop();
+        for(int i=n-1; i>=0; i--) {
 
+            while(!st.empty() && st.top() > prices[i]) {
+                st.pop();
+            }
             if(st.empty()) {
                 ans[i] = prices[i];
                 st.push(prices[i]);
