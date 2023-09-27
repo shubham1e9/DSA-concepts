@@ -1,32 +1,26 @@
 class Solution {
 public:
     string decodeAtIndex(string s, int k) {
-        long long size = 0;
-        int n = s.size();
+        long size=0;
 
-        // Calculate the size of the decoded string
-        for (int i = 0; i < n; i++) {
-            if (isdigit(s[i])) {
-                int repeat = s[i] - '0';
-                size *= repeat;
-            } else {
-                size++;
+        for(char c : s) {
+            if(isdigit(c)) {
+                size*=c-'0';
+            }
+            else {
+                ++size;
             }
         }
 
-        // Work backward to find the kth character
-        for (int i = n - 1; i >= 0; i--) {
-            if (isdigit(s[i])) {
-                int repeat = s[i] - '0';
-                size /= repeat;
+            for(int i=s.length()-1; i>=0; --i) {
                 k %= size;
-            } else {
-                if (k == 0 || k == size) {
-                    return string(1, s[i]);
-                }
-                size--;
-            }
-        }
-    return " ";
+                if(k == 0 && isalpha(s[i]))
+                    return string(1,s[i]);
+                if(isdigit(s[i]))
+                    size/=s[i]-'0';
+                else
+                    --size;
+            } 
+        throw;
     }
 };
