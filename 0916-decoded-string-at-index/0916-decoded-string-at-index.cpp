@@ -1,11 +1,11 @@
 class Solution {
 public:
     string decodeAtIndex(string s, int k) {
-        long size=0;
+        long long size = 0;
 
         for(char c : s) {
             if(isdigit(c)) {
-                size*=c-'0';
+                size *= c - '0';
             }
             else {
                 ++size;
@@ -14,13 +14,16 @@ public:
 
             for(int i=s.length()-1; i>=0; --i) {
                 k %= size;
-                if(k == 0 && isalpha(s[i]))
+                if(k == 0 && isalpha(s[i])) {
                     return string(1,s[i]);
-                if(isdigit(s[i]))
-                    size/=s[i]-'0';
-                else
+                }
+                if(isdigit(s[i])) {
+                    size /= s[i] - '0';
+                }
+                else {
                     --size;
+                }
             } 
-        throw;
+        return " ";
     }
 };
