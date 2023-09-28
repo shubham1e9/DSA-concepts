@@ -1,17 +1,17 @@
 class Solution {
 public:
-    vector<int> sortArrayByParity(vector<int>& nums) {
-        int low = 0, mid = 0;  
-        while(mid < nums.size()) {
-            if(nums[mid] & 1 == 1) {
-                mid++;
-            }
-            else {
-                swap(nums[low],nums[mid]);
-                low++;
-                mid++;
+    std::vector<int> sortArrayByParity(std::vector<int>& nums) {
+        std::vector<int> result;
+        for (int i : nums) {
+            if (i % 2 == 0) {
+                result.push_back(i);
             }
         }
-        return nums;
+        for (int j : nums) {
+            if (j % 2 != 0) {
+                result.push_back(j);
+            }
+        }
+        return result;
     }
 };
