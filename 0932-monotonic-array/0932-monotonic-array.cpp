@@ -4,7 +4,7 @@ public:
         if (nums.size() < 2) return true;
         int direction = 0;  
 
-        for(int i = 1; i < nums.size(); i++) {
+        for(size_t i = 1; i < nums.size(); i++) {
             if(nums[i] > nums[i-1]) {  
                 if(direction == 0) {
                     direction = 1;
