@@ -1,25 +1,16 @@
 class Solution {
 public:
-    bool isMonotonic(vector<int>& nums) {
-        if (nums.size() < 2) return true;
-        int direction = 0;  
+    bool isMonotonic(vector<int>& A) {
+        bool increase = true;
+        bool decrease = true;
+        
+        for(int i = 0; i < A.size() - 1; i++) {
 
-        for(size_t i = 1; i < nums.size(); i++) {
-            if(nums[i] > nums[i-1]) {  
-                if(direction == 0) {
-                    direction = 1;
-                }
-                else if(direction == -1) {
-                    return false;
-                }
-            } 
-            else if(nums[i] < nums[i-1]) {  
-                if(direction == 0) {
-                    direction = -1;
-                }
-                else if(direction == 1) {
-                    return false;
-                }
+            if(A[i] > A[i+1]) increase = false;
+            if(A[i] < A[i+1]) decrease = false;
+
+            if(increase == false && decrease == false) {
+                return false;
             }
         }
         return true;
