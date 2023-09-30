@@ -6,7 +6,6 @@ public:
         }
 
         stack<int> st;
-
         int third = INT_MIN;
 
         for(int i=nums.size()-1; i>=0; i--) {
