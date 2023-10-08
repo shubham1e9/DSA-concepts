@@ -1,24 +1,23 @@
 class Solution {
 public:
     int longestOnes(vector<int>& nums, int k) {
-        int left = 0, right = 0, longest = 0, n = nums.size();
-
-        while(right < n) {
+        int left = 0, right, n = nums.size();
+        
+        for(right = 0; right < n; right++) {
             if(nums[right] == 0) {
                 k--;
             }
+            // A negative k denotes we have consumed all allowed 
+            // flips and window has more than allowed zeros,
+            //  thus increment left pointer by 1 to keep the window size same.
 
-            while(k < 0) {
-                if(nums[left] == 0) {
-                    k++;
-                }
+            if(k < 0) {
+                // If the left element to be thrown out is zero we increase k.
+                k += 1 - nums[left];
                 left++;
             }
-
-            longest = max(longest, right - left + 1);
-            right++;
         }
 
-        return longest;
+        return right - left;
     }
 };
