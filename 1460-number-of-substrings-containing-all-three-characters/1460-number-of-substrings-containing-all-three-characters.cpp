@@ -1,24 +1,23 @@
 class Solution {
 public:
     int numberOfSubstrings(string s) {
-        int a = 0, b = 0, c = 0, count = 0;
-        int left = 0, n = s.size();
+        int count = 0;
+        int ai = -1, bi = -1, ci = -1;
 
-        for(int right = 0; right < n; ++right) {
-
-            if(s[right] == 'a') a++;
-            else if (s[right] == 'b') b++;
-            else if (s[right] == 'c') c++;
-
-            while(a > 0 && b > 0 && c > 0) {
-                count += n - right;
-                if(s[left] == 'a') a--;
-                else if (s[left] == 'b') b--;
-                else if (s[left] == 'c') c--;
-                left++;
+        for(int i=0; i<s.size(); i++) {
+            if(s[i] == 'a') {
+                ai = i;
+            }
+            if(s[i] == 'b') {
+                bi = i;
+            }
+            if(s[i] == 'c') {
+                ci = i;
+            }
+            if(i > 1) {
+                count += min({ai, bi, ci}) + 1;
             }
         }
-
         return count;
     }
 };
