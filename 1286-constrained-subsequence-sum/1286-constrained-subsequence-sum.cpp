@@ -1,7 +1,3 @@
-#include <vector>
-#include <deque>
-#include <algorithm>
-
 class Solution {
 public:
     int constrainedSubsetSum(std::vector<int>& nums, int k) {
@@ -18,6 +14,6 @@ public:
                 dq.push_back(i);
             }
         }
-        return *std::max_element(nums.begin(), nums.end());
+        return *max_element(nums.begin(), nums.end());
     }
 };
