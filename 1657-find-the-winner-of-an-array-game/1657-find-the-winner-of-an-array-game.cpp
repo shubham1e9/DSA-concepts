@@ -1,28 +1,21 @@
 class Solution {
 public:
     int getWinner(vector<int>& arr, int k) {
-        int maxElement = arr[0];
-        for(int i = 1; i < arr.size(); i++) {
-            maxElement = max(maxElement, arr[i]);
-        }
-        
-        int curr = arr[0], winstreak = 0;
+        int consecutiveWins = 0, currentWinner = arr[0];
         
         for(int i = 1; i < arr.size(); i++) {
-            int opponent = arr[i];
-            
-            if(curr > opponent) {
-                winstreak++;
+            if(arr[i] > currentWinner) {
+                currentWinner = arr[i];
+                consecutiveWins = 1;
             } 
             else {
-                curr = opponent;
-                winstreak = 1;
+                consecutiveWins++;
             }
-            
-            if(winstreak == k || curr == maxElement) {
-                return curr;
+
+            if(consecutiveWins == k) {
+                return currentWinner;
             }
         }
-        return -1;
+        return currentWinner;
     }
 };
