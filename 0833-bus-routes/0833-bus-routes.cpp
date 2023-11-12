@@ -1,43 +1,38 @@
 class Solution {
 public:
     int numBusesToDestination(vector<vector<int>>& routes, int source, int target) {
+        // int n = routes.size();
         if(source == target) return 0;
-
-        unordered_map<int, vector<int>> adjList;
-        for(int route = 0; route < routes.size(); route++) {
-            for(auto stop : routes[route]) {
-                adjList[stop].push_back(route);
+        // if(!n)
+        //     return -1;
+        unordered_map<int, vector<int>> stops;
+        for(int i = 0; i<routes.size(); i++) {
+            for(const auto&cur : routes[i]) {
+                stops[cur].push_back(i);
             }
         }
-
-        queue<int> q;
-        unordered_set<int> vis;
-        for(auto route : adjList[source]){
-            q.push(route);
-            vis.insert(route);
-        }
-
-        int busCount = 1;
-        while(q.size()) {
-            int size = q.size();
-
-            for(int i = 0; i < size; i++) {
-                int route = q.front(); q.pop();
-
-                for(auto stop: routes[route]) {
-                    if (stop == target) {
-                        return busCount;
-                    }
-
-                    for(auto nextRoute : adjList[stop]) {
-                        if(!vis.count(nextRoute)) {
-                            vis.insert(nextRoute);
-                            q.push(nextRoute);
+        queue<int> to_visit;
+        to_visit.push(source);
+        unordered_set<int>stop_visited, bus_visited;
+        stop_visited.insert(source);
+        int lvl = 0;
+        while(!to_visit.empty()){
+            auto s = to_visit.size();
+            while(s--){
+                auto cur = to_visit.front();
+                to_visit.pop();
+                if(cur == target)
+                    return lvl;
+                for(const auto&next_bus:stops[cur]){
+                    if(bus_visited.insert(next_bus).second){
+                        for(const auto&next_stop:routes[next_bus]){
+                            if(stop_visited.insert(next_stop).second)
+                                to_visit.push(next_stop);
                         }
                     }
                 }
             }
-            busCount++;
+            lvl++;
         }
         return -1;
     }
